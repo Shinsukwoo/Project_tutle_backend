@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework import generics , mixins
 from rest_framework.generics import get_object_or_404
 from .serializers import TbPlansSerializer , TbCustomersSerializer , TbItemsSerializer , TbOrdersSerializer, TbMaterialsSerializer
-from .serializers import TbProcessSerializer, TbPlanCreateSerializer, TbPlanOrderCreateSerializer , TbTest
+from .serializers import TbProcessSerializer, TbPlanCreateSerializer, TbPlanOrderCreateSerializer , TbTest 
 from .models import TbPlan , TbCustomer , TbItem , TbOrder , TbMaterial , TbProcess
 # Create your views here.
 def index(request):
