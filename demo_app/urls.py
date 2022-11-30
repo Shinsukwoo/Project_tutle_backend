@@ -12,5 +12,5 @@ urlpatterns = [
     path('process/', TbProcessAPIView.as_view()),       #  공정코드 , 공정명
     path('create_order/', TbPlanOrderCreateAPIView.as_view()),      # 등록(수주)
     path('order/<str:lot_num>/', TbPlanOrderRUDAPIView.as_view()),      # 수정 (수주)
-    path('test/plan/', TbPlanTestAPIView.as_view()),
+    path('test/plan/', TbPlanTestAPIView.as_view()),        #  TEST
 ]
