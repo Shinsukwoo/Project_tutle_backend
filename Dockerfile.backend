@@ -2,9 +2,9 @@ FROM python:3.10-slim-buster
 
 ENV PYTHONUNBUFFERED = 1
 
-RUN sudo apt update \
-    && sudo apt install -y gcc libpq-dev python-dev \
-    && sudo apt-get install default-libmysqlclient-dev
+RUN  apt update \
+    && apt install -y gcc libpq-dev python-dev \
+    && apt-get install default-libmysqlclient-dev
 
 RUN mkdir /srv/docker-server
 ADD . /srv/docker-server
@@ -14,5 +14,7 @@ WORKDIR /srv/docker-server/demo_mes
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-EXPOSE 8000    
-ENTRYPOINT ["sh", "./docker-entrypoint.sh"] 
+EXPOSE 8000  
+
+CMD ['python', 'manage.py','runserver', '0.0.0.0:8000']  
+# ENTRYPOINT ["sh", "./docker-entrypoint.sh"] 
