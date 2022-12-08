@@ -9,9 +9,10 @@ from rest_framework.generics import get_object_or_404
 from .serializers import TbPlansSerializer , TbCustomersSerializer , TbItemsSerializer , TbOrdersSerializer, TbMaterialsSerializer
 from .serializers import TbProcessSerializer, TbPlanCreateSerializer, TbPlanOrderCreateSerializer , TbTest 
 from .models import TbPlan , TbCustomer , TbItem , TbOrder , TbMaterial , TbProcess
-# Create your views here.
-# def index(request):
-#     return render(request, "demo_app/index.html")
+
+
+def index(request):
+    return render(request, 'demo_app/index.html')
 
 class TbPlansAPIView(APIView):      # 생산 계획 조회, 등록(계획) API 
     def get(self, request):
