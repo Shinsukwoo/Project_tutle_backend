@@ -20,6 +20,6 @@ from demo_app import views as demo_app_views
 urlpatterns = [
     path('', demo_app_views.index, name="index"),
     path('admin/', admin.site.urls),
-    path('mes/', include('demo_app.urls')),
+    path('', include('demo_app.urls')),
     path('users/', include('users.urls')),
 ]

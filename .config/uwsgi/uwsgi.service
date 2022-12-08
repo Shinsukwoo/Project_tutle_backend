@@ -3,7 +3,7 @@ Description=uWSGI service
 After=syslog.target
 
 [Service]
-ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /srv/demo_mes/.config/uwsgi/demo_mes.ini
+ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /srv/Project_tutle_backend/.config/uwsgi/demo_mes.ini
 
 Restart=always
 KillSignal=SIGQUIT
