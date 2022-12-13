@@ -7,9 +7,9 @@ from rest_framework.views import APIView
 from rest_framework import generics , mixins
 from rest_framework.generics import get_object_or_404
 from .serializers import TbPlansSerializer , TbCustomersSerializer , TbItemsSerializer , TbOrdersSerializer, TbMaterialsSerializer
-from .serializers import TbProcessSerializer, TbPlanCreateSerializer, TbPlanOrderCreateSerializer , TbTest 
-from .models import TbPlan , TbCustomer , TbItem , TbOrder , TbMaterial , TbProcess
-
+from .serializers import TbProcessSerializer, TbPlanCreateSerializer, TbPlanOrderCreateSerializer , TbTest, TbProductionLogSerializer, TbMachineSerializer
+from .serializers import TbCustomersCreateSerializer , TbItemsCreateSerializer
+from .models import TbPlan , TbCustomer , TbItem , TbOrder , TbMaterial , TbProcess , TbProductionLog, TbMachine
 
 def index(request):
     return render(request, 'demo_app/index.html')
@@ -58,14 +58,24 @@ class TbCustomersAPIView(APIView):      # 고객조회 API
         customers = TbCustomer.objects.all()
         serializer = TbCustomersSerializer(customers, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
+    def post(self, request):
+        serializer = TbCustomersCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data ,status=status.HTTP_201_CREATED)
+        return Response(serializer.errors ,status=status.HTTP_400_BAD_REQUEST)
 
 class TbItemsAPIView(APIView):      # 제품조회 API
     def get(self, request):
         items = TbItem.objects.all()
         serializer = TbItemsSerializer(items, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
+    def post(self,request):
+        serializer = TbItemsCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class TbMaterialsAPIView(APIView):      # 원자재조회 API
     def get(self, request):
@@ -87,4 +97,22 @@ class TbPlanTestAPIView(APIView):
         for ordercode in serializer.data:
             print(ordercode.order_code)
             print(ordercode.lot_num)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class TbProductionLogAPIView(APIView):
+    def get(self, request):
+        productionlog = TbProductionLog.objects.filter(curdatetime__contains='20210506')
+        serializer = TbProductionLogSerializer(productionlog, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class TbMachineAPIView(APIView):
+    def get(self,request):
+        machine = TbMachine.objects.all()
+        serializer = TbMachineSerializer(machine,many=True)
+        return Response(serializer.data , status=status.HTTP_200_OK)
+
+class TbProductionLogRealTimeAPIView(APIView):
+    def get(self,request):
+        productionlog = TbProductionLog.objects.filter(curdatetime__contains='20210615')
+        serializer = TbProductionLogSerializer(productionlog, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

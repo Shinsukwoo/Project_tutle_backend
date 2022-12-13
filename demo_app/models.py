@@ -210,16 +210,16 @@ class TbBomProcess(models.Model):
 class TbCustomer(models.Model):
     customer_name = models.CharField(max_length=30)
     customer_code = models.CharField(primary_key=True, max_length=30)
-    homepage = models.CharField(max_length=100, blank=True, null=True)
+    homepage = models.CharField(max_length=100, blank=True, null=True,default='')
     customer_phone = models.CharField(max_length=30, blank=True, null=True)
     representative_name = models.CharField(max_length=30, blank=True, null=True)
     representative_phone = models.CharField(max_length=30, blank=True, null=True)
-    representative_email = models.CharField(max_length=100, blank=True, null=True)
-    note = models.TextField(blank=True, null=True)
-    reg_date = models.DateField()
-    reg_id = models.CharField(max_length=30)
-    mod_date = models.DateField()
-    mod_id = models.CharField(max_length=30)
+    representative_email = models.CharField(max_length=100, blank=True, null=True, default='')
+    note = models.TextField(blank=True, null=True,default='')
+    reg_date = models.DateField(auto_now_add=True)
+    reg_id = models.CharField(max_length=30,default='')
+    mod_date = models.DateField(auto_now_add=True)
+    mod_id = models.CharField(max_length=30,default='')
 
     class Meta:
         managed = False
@@ -334,13 +334,13 @@ class TbItem(models.Model):
     item_code = models.TextField(primary_key=True)
     item_name = models.TextField(blank=True, null=True)
     unit = models.CharField(max_length=30)
-    sort = models.CharField(max_length=30)
-    spec = models.CharField(max_length=30)
-    note = models.TextField(blank=True, null=True)
-    reg_date = models.DateField()
-    reg_id = models.CharField(max_length=30)
-    mod_date = models.DateField()
-    mod_id = models.CharField(max_length=30)
+    sort = models.CharField(max_length=30,default='')
+    spec = models.CharField(max_length=30,default='')
+    note = models.TextField(blank=True, null=True,default='')
+    reg_date = models.DateField(auto_now_add=True)
+    reg_id = models.CharField(max_length=30,default='')
+    mod_date = models.DateField(auto_now_add=True)
+    mod_id = models.CharField(max_length=30,default='')
 
     class Meta:
         managed = False
